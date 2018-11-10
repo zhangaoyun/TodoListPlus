@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Rect;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,13 +61,16 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String task = taskEditText.getText().toString();
-                                SQLiteDatabase db = mHelper.getWritableDatabase();
-                                ContentValues values = new ContentValues();
-                                Log.d("SQLite", "Here");
-                                values.put("title", task);
-                                db.insert("tasks", null, values);
-                                db.close();
-                                updateUI();
+                                if(task.compareTo("")!=0){
+                                    SQLiteDatabase db = mHelper.getWritableDatabase();
+                                    ContentValues values = new ContentValues();
+                                    Log.d("SQLite", "Here");
+                                    values.put("title", task);
+                                    db.insert("tasks", null, values);
+                                    db.close();
+                                    updateUI();
+                                }
+
                             }
                         })
                         .setNegativeButton("取消", null)
