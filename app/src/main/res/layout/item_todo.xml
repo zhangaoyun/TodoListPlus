@@ -7,16 +7,19 @@
         android:id="@+id/task_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="998" />
+        android:layout_weight="998"
+        android:onClick="editTask"/>
 
 
-    <Button
-        android:id="@+id/set_notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="15dp"
-        android:text="提醒" />
+    <!--<Button-->
+        <!--android:id="@+id/set_notification"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:textSize="15dp"-->
+        <!--android:text="提醒" />-->
+
+
 
     <Button
         android:id="@+id/task_delete"
@@ -25,7 +28,16 @@
         android:layout_weight="1"
         android:onClick="deleteTask"
         android:textSize="15dp"
-        android:text="完成" />
+        android:textColor="#df0303"
+        android:text="删除" />
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/floatingActionButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:clickable="true"-->
+        <!--android:layout_weight="1"-->
+
+        <!--app:srcCompat="@android:drawable/ic_input_add" />-->
 
 
 </LinearLayout>

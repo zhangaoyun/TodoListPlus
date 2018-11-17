@@ -30,7 +30,7 @@ public class TasksAdapter extends RecyclerView.Adapter <TasksAdapter.MyRecyclerV
     @Override
     public void onBindViewHolder(MyRecyclerViewHolder holder, int position) {
         String todoTitle = mTasksList.get(position);
-        holder.textView.setText(todoTitle);
+        holder.textView.setText("●  "+todoTitle);
     }
 
     @Override

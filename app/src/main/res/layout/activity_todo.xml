@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TodoActivity"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/set_priority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="设置优先级"/>
+
+    <Button
+        android:id="@+id/set_notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="设置提醒"/>
+
+    <TextView
+        android:paddingVertical="10dp"
+        android:id="@+id/alarm_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="46dp"
+        android:text="-------------还未设置提醒-------------"/>
+
+    <Button
+        android:id="@+id/reedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="修改Todo内容"/>
+
+    <Button
+        android:id="@+id/query"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="查询"/>
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="deleteTask"
+        android:text="删除"
+        android:textColor="#ff4040"/>
+
+    <Button
+        android:id="@+id/test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test"/>
+
+</LinearLayout>

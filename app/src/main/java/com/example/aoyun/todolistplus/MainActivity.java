@@ -1,28 +1,28 @@
 package com.example.aoyun.todolistplus;
 
 import android.content.ContentValues;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.support.v7.widget.DividerItemDecoration;
 
 import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private TaskDbHelper mHelper;   //声明数据库Helper
+    public static ArrayList <String> tasksList = new ArrayList <>();
+
+    public TaskDbHelper mHelper;
     private RecyclerView mTaskRecyclerView; //recycler_view
     private TasksAdapter mAdapter;  //Todo适配器
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mHelper = new TaskDbHelper(this, "tasks", null, 1);    //四个参数
-        mTaskRecyclerView = findViewById(R.id.recycler_view);    //找到RecyclerView
+        mTaskRecyclerView = findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mTaskRecyclerView.setLayoutManager(layoutManager);  //设置LinearLayoutManager
         mTaskRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
@@ -52,33 +52,30 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_task:
-                final EditText taskEditText = new EditText(this);
-                AlertDialog dialog = new AlertDialog.Builder(this)  //是否增加Todo的AlertDialog
-                        .setTitle("增加一个新的Todo")
-                        .setMessage("打算做什么？")
-                        .setView(taskEditText)
-                        .setPositiveButton("增加", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String task = taskEditText.getText().toString();
-                                if(task.compareTo("")!=0){
-                                    SQLiteDatabase db = mHelper.getWritableDatabase();
-                                    ContentValues values = new ContentValues();
-                                    Log.d("SQLite", "Here");
-                                    values.put("title", task);
-                                    db.insert("tasks", null, values);
-                                    db.close();
-                                    updateUI();
-                                }
-
-                            }
-                        })
-                        .setNegativeButton("取消", null)
-                        .create();
-                dialog.show();
+                Intent intent = new Intent(MainActivity.this, EditActivity.class);
+                startActivityForResult(intent, 1);
                 return true;
             default:
                 return true;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    String returnedData = data.getStringExtra("data");
+                    SQLiteDatabase db = mHelper.getWritableDatabase();
+                    ContentValues values = new ContentValues();
+                    Log.d("SQLite", "Here");
+                    values.put("title", returnedData);
+                    db.insert("tasks", null, values);
+                    db.close();
+                    updateUI();
+                }
+                break;
+            default:
         }
     }
 
@@ -92,29 +89,22 @@ public class MainActivity extends AppCompatActivity {
         updateUI();
     }
 
+    public void editTask(View view) {
+        Intent intent = new Intent(MainActivity.this, TodoActivity.class);
+        startActivity(intent);
+    }
+
     private void updateUI() {
-        ArrayList <String> tasksList = new ArrayList <>();
+        tasksList.clear();
         SQLiteDatabase db = mHelper.getReadableDatabase();
         Cursor cursor = db.query("tasks", new String[]{"_id", "title"}, null, null, null, null, null);
         while (cursor.moveToNext()) {
             int idx = cursor.getColumnIndex("title");//获取某一列在表中对应的位置索引
             tasksList.add(cursor.getString(idx));
         }
-
-        mAdapter = new TasksAdapter(tasksList, this);    //new一个
-        mTaskRecyclerView.setAdapter(mAdapter);
-
+            mAdapter = new TasksAdapter(tasksList, this);
+            mTaskRecyclerView.setAdapter(mAdapter);
 
         cursor.close(); //需要close
     }
-
-    //想要用这种方法添加分割线未成功
-//    class MyDecoration extends RecyclerView.ItemDecoration{
-//        @Override
-//        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-//            super.getItemOffsets(outRect, view, parent, state);
-//            outRect.set(0,0,0,getResources().getDimensionPixelOffset(R.dimen.dividerHeight));
-//        }
-//    }
-
 }
