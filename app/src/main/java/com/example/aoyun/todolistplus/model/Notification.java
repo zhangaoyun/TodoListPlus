@@ -1,4 +1,4 @@
-package com.example.aoyun.todolistplus.view;
+package com.example.aoyun.todolistplus.model;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.aoyun.todolistplus.R;
+import com.example.aoyun.todolistplus.view.MainActivity;
 
 public class Notification extends AppCompatActivity {
 
