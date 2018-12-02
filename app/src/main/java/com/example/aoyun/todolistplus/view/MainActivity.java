@@ -1,4 +1,4 @@
-package com.example.aoyun.todolistplus;
+package com.example.aoyun.todolistplus.view;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -15,12 +15,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.aoyun.todolistplus.EditActivity;
+import com.example.aoyun.todolistplus.R;
+import com.example.aoyun.todolistplus.TaskDbHelper;
+import com.example.aoyun.todolistplus.TasksAdapter;
+import com.example.aoyun.todolistplus.TodoActivity;
+
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainView{
 
-    public static ArrayList <String> tasksList = new ArrayList <>();
+    public ArrayList <String> tasksList = new ArrayList <>();
 
     public TaskDbHelper mHelper;
     private RecyclerView mTaskRecyclerView; //recycler_view
@@ -79,14 +85,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     public void deleteTask(View view) {
+        Log.d("DEL","DEL");
         View parent = (View) view.getParent();
         TextView taskTextView = parent.findViewById(R.id.task_title);
         String task = taskTextView.getText().toString();
+        Log.d("DEL",task);
         SQLiteDatabase db = mHelper.getWritableDatabase();
         db.delete("tasks", "title = ?", new String[]{task});
         db.close();
         updateUI();
+        Log.d("DEL","DEL2");
     }
 
     public void editTask(View view) {
@@ -94,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void updateUI() {
+    public void updateUI() {
         tasksList.clear();
         SQLiteDatabase db = mHelper.getReadableDatabase();
         Cursor cursor = db.query("tasks", new String[]{"_id", "title"}, null, null, null, null, null);
@@ -102,9 +112,22 @@ public class MainActivity extends AppCompatActivity {
             int idx = cursor.getColumnIndex("title");//获取某一列在表中对应的位置索引
             tasksList.add(cursor.getString(idx));
         }
-            mAdapter = new TasksAdapter(tasksList, this);
-            mTaskRecyclerView.setAdapter(mAdapter);
+        System.out.println(tasksList);
+        mAdapter = new TasksAdapter(tasksList, this);
+        mTaskRecyclerView.setAdapter(mAdapter);
+        Log.d("DEL","DEL3");
 
         cursor.close(); //需要close
     }
+
+
+//    public void deleteTask(View view) {
+//        View parent = (View) view.getParent();
+//        TextView taskTextView = parent.findViewById(R.id.task_title);
+//        String task = taskTextView.getText().toString();
+//        SQLiteDatabase db = mHelper.getWritableDatabase();
+//        db.delete("tasks", "title = ?", new String[]{task});
+//        db.close();
+//        updateUI();
+//    }
 }
