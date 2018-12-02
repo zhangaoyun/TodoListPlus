@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditActivity"
+    tools:context=".view.EditActivity"
     android:orientation="vertical">
     <Button
         android:layout_width="match_parent"

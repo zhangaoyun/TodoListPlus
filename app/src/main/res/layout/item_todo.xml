@@ -17,7 +17,6 @@
         android:layout_weight="1"
         android:onClick="deleteTask"
         android:textSize="15dp"
-        android:textColor="#df0303"
         android:text="完成" />
     <!--<android.support.design.widget.FloatingActionButton-->
         <!--android:id="@+id/floatingActionButton"-->

@@ -1,4 +1,4 @@
-package com.example.aoyun.todolistplus;
+package com.example.aoyun.todolistplus.view;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,15 +17,15 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.aoyun.todolistplus.view.MainActivity;
-import com.example.aoyun.todolistplus.view.Notification;
+import com.example.aoyun.todolistplus.R;
+import com.example.aoyun.todolistplus.model.TaskDbHelper;
 
 import java.util.Calendar;
 
 
 
 
-public class TodoActivity extends MainActivity {
+public class TodoActivity extends AppCompatActivity {
 
     private AlarmManager alarmManager;
     private PendingIntent pi;
@@ -128,24 +129,5 @@ public class TodoActivity extends MainActivity {
         Toast.makeText(this, "提醒设置时间为：" + month + "月" + day + "日" + hour + "时" + minute + "分", Toast.LENGTH_SHORT).show();
         alarm_time.setText("设置的提醒时间为："+"\n"+clockCalendar.getTime());
         alarmManager.set(AlarmManager.RTC_WAKEUP, clockCalendar.getTimeInMillis(), pi);
-//        //下面是通知
-//
-//        Intent intent = new Intent(this, MainActivity.class);
-//        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);
-//
-//        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-//        android.app.Notification notification = new NotificationCompat.Builder(this, "default")
-//                .setAutoCancel(true)
-//                .setContentTitle("This is content title")
-//                .setContentText("This is content text")
-//                .setSmallIcon(R.mipmap.ic_launcher)
-//                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
-//                .setContentIntent(pi)
-////                .setSound(Uri.fromFile(new File("/storage/emulated/0/KuwoMusic/music/都选C.mp3")))
-//                .setDefaults(NotificationCompat.DEFAULT_ALL)
-//                .setPriority(NotificationCompat.PRIORITY_MAX)
-//                .setLights(Color.GREEN, 1000, 1000)
-//                .build();
-//        manager.notify(1, notification);
     }
 }

@@ -15,11 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.aoyun.todolistplus.EditActivity;
 import com.example.aoyun.todolistplus.R;
-import com.example.aoyun.todolistplus.TaskDbHelper;
-import com.example.aoyun.todolistplus.TasksAdapter;
-import com.example.aoyun.todolistplus.TodoActivity;
+import com.example.aoyun.todolistplus.model.TaskDbHelper;
 
 import java.util.ArrayList;
 
@@ -42,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         mTaskRecyclerView = findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mTaskRecyclerView.setLayoutManager(layoutManager);  //设置LinearLayoutManager
-        mTaskRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        mTaskRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL)); //设置分割线
 
         updateUI(); //更新界面
 
@@ -85,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         }
     }
 
-
+    @Override
     public void deleteTask(View view) {
         Log.d("DEL", "DEL");
         View parent = (View) view.getParent();
@@ -99,11 +96,13 @@ public class MainActivity extends AppCompatActivity implements MainView {
         Log.d("DEL", "DEL2");
     }
 
+    @Override
     public void editTask(View view) {
         Intent intent = new Intent(MainActivity.this, TodoActivity.class);
         startActivity(intent);
     }
 
+    @Override
     public void updateUI() {
         tasksList.clear();
         SQLiteDatabase db = mHelper.getReadableDatabase();
