@@ -24,7 +24,7 @@ import com.example.aoyun.todolistplus.TodoActivity;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements MainView{
+public class MainActivity extends AppCompatActivity implements MainView {
 
     public ArrayList <String> tasksList = new ArrayList <>();
 
@@ -87,16 +87,16 @@ public class MainActivity extends AppCompatActivity implements MainView{
 
 
     public void deleteTask(View view) {
-        Log.d("DEL","DEL");
+        Log.d("DEL", "DEL");
         View parent = (View) view.getParent();
         TextView taskTextView = parent.findViewById(R.id.task_title);
         String task = taskTextView.getText().toString();
-        Log.d("DEL",task);
+        Log.d("DEL", task);
         SQLiteDatabase db = mHelper.getWritableDatabase();
         db.delete("tasks", "title = ?", new String[]{task});
         db.close();
         updateUI();
-        Log.d("DEL","DEL2");
+        Log.d("DEL", "DEL2");
     }
 
     public void editTask(View view) {
@@ -115,19 +115,9 @@ public class MainActivity extends AppCompatActivity implements MainView{
         System.out.println(tasksList);
         mAdapter = new TasksAdapter(tasksList, this);
         mTaskRecyclerView.setAdapter(mAdapter);
-        Log.d("DEL","DEL3");
+        Log.d("DEL", "DEL3");
 
         cursor.close(); //需要close
     }
 
-
-//    public void deleteTask(View view) {
-//        View parent = (View) view.getParent();
-//        TextView taskTextView = parent.findViewById(R.id.task_title);
-//        String task = taskTextView.getText().toString();
-//        SQLiteDatabase db = mHelper.getWritableDatabase();
-//        db.delete("tasks", "title = ?", new String[]{task});
-//        db.close();
-//        updateUI();
-//    }
 }

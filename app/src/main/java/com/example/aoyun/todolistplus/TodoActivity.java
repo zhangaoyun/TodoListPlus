@@ -17,6 +17,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.aoyun.todolistplus.view.MainActivity;
+import com.example.aoyun.todolistplus.view.Notification;
 
 import java.util.Calendar;
 
@@ -31,7 +32,6 @@ public class TodoActivity extends MainActivity {
     TextView alarm_time ;
 
 
-    private static int mYear;
     private static int mMonth;
     private static int mDay;
     private static int mHour;
@@ -53,7 +53,7 @@ public class TodoActivity extends MainActivity {
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-        Intent intent = new Intent(TodoActivity.this, com.example.aoyun.todolistplus.Notification.class);
+        Intent intent = new Intent(TodoActivity.this, Notification.class);
         pi = PendingIntent.getActivity(TodoActivity.this, 0, intent, 0);
 
 
@@ -99,21 +99,14 @@ public class TodoActivity extends MainActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, final int month, int dayOfMonth) {
-                        mYear = year;
                         mMonth = month;
                         mDay = dayOfMonth;
-                        TimePickerDialog timePickerDialog = new TimePickerDialog(TodoActivity.this,
-                                android.app.AlertDialog.THEME_HOLO_LIGHT, new TimePickerDialog.OnTimeSetListener() {
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(TodoActivity.this, new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 mHour = hourOfDay;
                                 mMinute = minute;
-                                if (mHour < system_hour && mMinute < system_minute) {
-                                    Toast.makeText(TodoActivity.this, "无效时间", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    setClock(mMonth, mDay, mHour, mMinute);
-                                }
-
+                                setClock(mMonth, mDay, mHour, mMinute);
                             }
                         }, system_hour, system_minute, true);
                         timePickerDialog.show();

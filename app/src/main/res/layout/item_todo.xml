@@ -10,17 +10,6 @@
         android:layout_weight="998"
         android:onClick="editTask"/>
 
-
-    <!--<Button-->
-        <!--android:id="@+id/set_notification"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="1"-->
-        <!--android:textSize="15dp"-->
-        <!--android:text="提醒" />-->
-
-
-
     <Button
         android:id="@+id/task_delete"
         android:layout_width="wrap_content"
@@ -29,7 +18,7 @@
         android:onClick="deleteTask"
         android:textSize="15dp"
         android:textColor="#df0303"
-        android:text="删除" />
+        android:text="完成" />
     <!--<android.support.design.widget.FloatingActionButton-->
         <!--android:id="@+id/floatingActionButton"-->
         <!--android:layout_width="wrap_content"-->

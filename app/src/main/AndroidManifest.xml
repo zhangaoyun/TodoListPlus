@@ -18,8 +18,7 @@
         </activity>
         <activity android:name=".EditActivity" />
         <activity android:name=".TodoActivity" />
-        <activity android:name=".Notification"></activity>
-        <receiver android:name=".RemindReceiver"/>
+        <activity android:name=".view.Notification"></activity>
     </application>
 
 </manifest>

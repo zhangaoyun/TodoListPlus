@@ -1,4 +1,4 @@
-package com.example.aoyun.todolistplus;
+package com.example.aoyun.todolistplus.view;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.aoyun.todolistplus.view.MainActivity;
+import com.example.aoyun.todolistplus.R;
 
 public class Notification extends AppCompatActivity {
 
@@ -24,8 +24,8 @@ public class Notification extends AppCompatActivity {
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         android.app.Notification notification = new NotificationCompat.Builder(this, "default")
                 .setAutoCancel(true)
-                .setContentTitle("This is content title")
-                .setContentText("This is content text")
+                .setContentTitle("TodoListPlus发来了一条通知")
+//                .setContentText("This is content text")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
                 .setContentIntent(pi)
