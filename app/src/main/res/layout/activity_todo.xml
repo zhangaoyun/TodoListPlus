@@ -39,13 +39,13 @@
         android:layout_height="wrap_content"
         android:text="查询"/>
 
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="deleteTask"
-        android:text="删除"
-        android:textColor="#ff4040"/>
+    <!--<Button-->
+        <!--android:id="@+id/delete"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:onClick="deleteTask"-->
+        <!--android:text="删除"-->
+        <!--android:textColor="#ff4040"/>-->
 
     <Button
         android:id="@+id/test"
